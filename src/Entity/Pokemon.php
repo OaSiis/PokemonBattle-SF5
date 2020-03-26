@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,16 @@ class Pokemon
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Attack")
+     */
+    private $attacks;
+
+    public function __construct()
+    {
+        $this->attacks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +114,32 @@ class Pokemon
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Attack[]
+     */
+    public function getAttacks(): Collection
+    {
+        return $this->attacks;
+    }
+
+    public function addAttack(Attack $attack): self
+    {
+        if (!$this->attacks->contains($attack)) {
+            $this->attacks[] = $attack;
+        }
+
+        return $this;
+    }
+
+    public function removeAttack(Attack $attack): self
+    {
+        if ($this->attacks->contains($attack)) {
+            $this->attacks->removeElement($attack);
+        }
 
         return $this;
     }

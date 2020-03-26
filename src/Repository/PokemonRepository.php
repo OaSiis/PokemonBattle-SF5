@@ -22,7 +22,11 @@ class PokemonRepository extends ServiceEntityRepository
     // /**
     //  * @return Pokemon[] Returns an array of Pokemon objects
     //  */
-    /*
+
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('p')
@@ -34,7 +38,7 @@ class PokemonRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Pokemon
