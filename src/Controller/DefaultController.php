@@ -10,15 +10,10 @@ class DefaultController extends AbstractController
 {
     public function index()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $pokemons = $em->getRepository(Pokemon::class)->findAll();
-
-        $attacks = $em->getRepository(Attack::class)->findAll();
+        $pokemonRepo = $this->getDoctrine()->getRepository(Pokemon::class);
 
         return $this->render('default/index.html.twig', [
-            'pokemons' => $pokemons,
-            'attacks' => $attacks
+            'pokemons' => $pokemonRepo->findAll(),
         ]);
     }
 }

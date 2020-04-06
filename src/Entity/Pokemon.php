@@ -9,8 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PokemonRepository")
  */
-class Pokemon
+class Pokemon extends Base
 {
+    const TYPE_FIRE = 1;
+    const TYPE_WATER = 2;
+    const TYPE_PLANT = 3;
+
+    use \TypeTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -142,5 +148,10 @@ class Pokemon
         }
 
         return $this;
+    }
+
+    public function __tostring()
+    {
+        return $this->name;
     }
 }

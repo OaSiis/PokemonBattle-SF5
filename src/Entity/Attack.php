@@ -7,8 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AttackRepository")
  */
-class Attack
+class Attack extends Base
 {
+    const TYPE_FIRE = 1;
+    const TYPE_WATER = 2;
+    const TYPE_PLANT = 3;
+
+    use \TypeTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -87,5 +93,10 @@ class Attack
         $this->type = $type;
 
         return $this;
+    }
+
+    public function __tostring()
+    {
+        return $this->name;
     }
 }
